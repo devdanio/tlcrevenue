@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Outlet } from "@tanstack/react-router";
 
 import * as React from "react";
 import type {} from "@mui/x-date-pickers/themeAugmentation";
@@ -56,7 +56,8 @@ function Dashboard(props: { disableCustomTheme?: boolean }) {
             }}
           >
             <Header />
-            <MainGrid />
+            this is the thing
+            <Outlet />
           </Stack>
         </Box>
       </Box>

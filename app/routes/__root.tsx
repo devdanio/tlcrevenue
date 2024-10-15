@@ -1,5 +1,6 @@
 // app/routes/__root.tsx
 import { createRootRoute } from "@tanstack/react-router";
+import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import { Outlet, ScrollRestoration } from "@tanstack/react-router";
 import { Body, Head, Html, Meta, Scripts } from "@tanstack/start";
 import { StyledEngineProvider } from "@mui/material/styles";
@@ -62,6 +63,7 @@ function RootComponent() {
     <StyledEngineProvider injectFirst>
       <RootDocument>
         <Outlet />
+        <TanStackRouterDevtools />
       </RootDocument>
     </StyledEngineProvider>
   );

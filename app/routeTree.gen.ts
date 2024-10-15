@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as DashboardImport } from './routes/dashboard'
 import { Route as IndexImport } from './routes/index'
+import { Route as DasboardIndexImport } from './routes/dasboard/index'
 
 // Create/Update Routes
 
@@ -23,6 +24,11 @@ const DashboardRoute = DashboardImport.update({
 
 const IndexRoute = IndexImport.update({
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const DasboardIndexRoute = DasboardIndexImport.update({
+  path: '/dasboard/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -44,6 +50,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardImport
       parentRoute: typeof rootRoute
     }
+    '/dasboard/': {
+      id: '/dasboard/'
+      path: '/dasboard'
+      fullPath: '/dasboard'
+      preLoaderRoute: typeof DasboardIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -52,36 +65,41 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
+  '/dasboard': typeof DasboardIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
+  '/dasboard': typeof DasboardIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
+  '/dasboard/': typeof DasboardIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard'
+  fullPaths: '/' | '/dashboard' | '/dasboard'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard'
-  id: '__root__' | '/' | '/dashboard'
+  to: '/' | '/dashboard' | '/dasboard'
+  id: '__root__' | '/' | '/dashboard' | '/dasboard/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DashboardRoute: typeof DashboardRoute
+  DasboardIndexRoute: typeof DasboardIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DashboardRoute: DashboardRoute,
+  DasboardIndexRoute: DasboardIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -97,7 +115,8 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/dashboard"
+        "/dashboard",
+        "/dasboard/"
       ]
     },
     "/": {
@@ -105,6 +124,9 @@ export const routeTree = rootRoute
     },
     "/dashboard": {
       "filePath": "dashboard.tsx"
+    },
+    "/dasboard/": {
+      "filePath": "dasboard/index.tsx"
     }
   }
 }
