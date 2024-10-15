@@ -1,46 +1,50 @@
-// app/routes/index.tsx
-import * as fs from "fs";
-import { createFileRoute, useRouter } from "@tanstack/react-router";
+import {
+  SignedIn,
+  UserButton,
+  SignOutButton,
+  SignedOut,
+  SignInButton,
+  SignUpButton,
+} from "@clerk/tanstack-start";
+import { getAuth } from "@clerk/tanstack-start/server";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/start";
 
-const filePath = "count.txt";
+const authStateFn = createServerFn("GET", async (_, { request }) => {
+  const { userId } = await getAuth(request);
 
-async function readCount() {
-  return parseInt(
-    await fs.promises.readFile(filePath, "utf-8").catch(() => "0")
-  );
-}
+  if (userId) {
+    throw redirect({
+      to: "/dashboard",
+    });
+  }
 
-const getCount = createServerFn("GET", () => {
-  return readCount();
-});
-
-const updateCount = createServerFn("POST", async (addBy: number) => {
-  const count = await readCount();
-  await fs.promises.writeFile(filePath, `${count + addBy}`);
+  return { userId };
 });
 
 export const Route = createFileRoute("/")({
   component: Home,
-  loader: async () => await getCount(),
+  beforeLoad: async () => await authStateFn(),
 });
 
 function Home() {
-  const router = useRouter();
-  const state = Route.useLoaderData();
-
   return (
-    <>
-      <button
-        onClick={() => {
-          updateCount(1).then(() => {
-            router.invalidate();
-          });
-        }}
-      >
-        Add 1 to {state}?
-      </button>
-      asldkjfalskjdf
-    </>
+    <div>
+      <h1>TLC Revenue</h1>
+      <SignedIn>
+        <p>You are signed in</p>
+
+        <UserButton />
+
+        <SignOutButton />
+      </SignedIn>
+      <SignedOut>
+        <p>You are signed out</p>
+
+        <SignInButton />
+
+        <SignUpButton />
+      </SignedOut>
+    </div>
   );
 }

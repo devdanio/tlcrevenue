@@ -1,4 +1,6 @@
-import { createFileRoute, Outlet } from "@tanstack/react-router";
+import { createFileRoute, redirect, Outlet } from "@tanstack/react-router";
+import { createServerFn } from "@tanstack/start";
+import { getAuth } from "@clerk/tanstack-start/server";
 
 import * as React from "react";
 import type {} from "@mui/x-date-pickers/themeAugmentation";
@@ -28,6 +30,18 @@ const xThemeComponents = {
   ...treeViewCustomizations,
 };
 
+const authStateFn = createServerFn("GET", async (_, { request }) => {
+  const { userId } = await getAuth(request);
+
+  if (!userId) {
+    throw redirect({
+      to: "/",
+    });
+  }
+
+  return { userId };
+});
+
 function Dashboard(props: { disableCustomTheme?: boolean }) {
   return (
     <AppTheme {...props} themeComponents={xThemeComponents}>
@@ -56,7 +70,6 @@ function Dashboard(props: { disableCustomTheme?: boolean }) {
             }}
           >
             <Header />
-            this is the thing
             <Outlet />
           </Stack>
         </Box>
@@ -67,4 +80,8 @@ function Dashboard(props: { disableCustomTheme?: boolean }) {
 
 export const Route = createFileRoute("/dashboard")({
   component: () => <Dashboard />,
+  beforeLoad: async () => await authStateFn(),
+  // loader: async ({ context }) => {
+  //   return { userId: context.userId };
+  // },
 });
