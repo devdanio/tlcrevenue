@@ -11,6 +11,7 @@ export default defineConfig({
         "@mui/material",
         "@mui/styles",
         "@mui/x-date-pickers",
+        "@mui/util",
       ],
     },
     plugins: [
