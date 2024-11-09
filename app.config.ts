@@ -3,16 +3,16 @@ import tsConfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
   vite: {
-    build: {
-      rollupOptions: {
-        external: ["@mui/utils"],
-        output: {
-          manualChunks: {
-            mui: ["@mui/material", "@mui/icons-material"],
-          },
-        },
-      },
-    },
+    // build: {
+    //   rollupOptions: {
+    //     external: ["@mui/utils"],
+    //     output: {
+    //       manualChunks: {
+    //         mui: ["@mui/material", "@mui/icons-material"],
+    //       },
+    //     },
+    //   },
+    // },
     // optimizeDeps: {
     //   include: ["@mui/material", "@mui/icons-material"],
     //   exclude: ["@mui/utils"],
