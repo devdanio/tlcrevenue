@@ -1,13 +1,14 @@
 // app/routes/__root.tsx
 import { createRootRoute } from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/router-devtools";
+
 import { Outlet, ScrollRestoration } from "@tanstack/react-router";
 import { Body, Head, Html, Meta, Scripts } from "@tanstack/start";
 import { StyledEngineProvider } from "@mui/material/styles";
 import { ClerkProvider } from "@clerk/tanstack-start";
-
+import appCSS from "../main.css?url";
 import * as React from "react";
 import "@fontsource-variable/lexend-deca";
+import AppTheme from "~/theme/AppTheme";
 
 export const Route = createRootRoute({
   meta: () => [
@@ -32,6 +33,7 @@ export const Route = createRootRoute({
     },
   ],
   links: () => [
+    { rel: "stylesheet", href: appCSS },
     {
       rel: "stylesheet",
       href: "https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap",
@@ -47,10 +49,12 @@ export const Route = createRootRoute({
 function RootComponent() {
   return (
     <StyledEngineProvider injectFirst>
-      <RootDocument>
-        <Outlet />
-        <TanStackRouterDevtools position="bottom-right" />
-      </RootDocument>
+      <AppTheme>
+        <RootDocument>
+          <Outlet />
+          {/* <TanStackRouterDevtools position="bottom-right" /> */}
+        </RootDocument>
+      </AppTheme>
     </StyledEngineProvider>
   );
 }

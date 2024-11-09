@@ -16,44 +16,29 @@ import { surfacesCustomizations } from "~/shared-theme/customizations/surfaces";
 
 interface AppThemeProps {
   children: React.ReactNode;
-  /**
-   * This is for the docs site. You can ignore it or remove it.
-   */
-  disableCustomTheme?: boolean;
-  themeComponents?: ThemeOptions["components"];
 }
 
-export default function AppTheme({
-  children,
-  disableCustomTheme,
-  themeComponents,
-}: AppThemeProps) {
+export default function AppTheme({ children }: AppThemeProps) {
   const theme = React.useMemo(() => {
-    return disableCustomTheme
-      ? {}
-      : createTheme({
-          // For more details about CSS variables configuration, see https://mui.com/material-ui/customization/css-theme-variables/configuration/
-          cssVariables: {
-            colorSchemeSelector: "data-mui-color-scheme",
-            cssVarPrefix: "template",
-          },
-          colorSchemes,
-          typography,
-          shadows,
-          shape,
-          components: {
-            ...inputsCustomizations,
-            ...dataDisplayCustomizations,
-            ...feedbackCustomizations,
-            ...navigationCustomizations,
-            ...surfacesCustomizations,
-            ...themeComponents,
-          },
-        });
-  }, [disableCustomTheme, themeComponents]);
-  if (disableCustomTheme) {
-    return <React.Fragment>{children}</React.Fragment>;
-  }
+    return createTheme({
+      // For more details about CSS variables configuration, see https://mui.com/material-ui/customization/css-theme-variables/configuration/
+      cssVariables: {
+        colorSchemeSelector: "data-mui-color-scheme",
+        cssVarPrefix: "template",
+      },
+      colorSchemes,
+      typography,
+      shadows,
+      shape,
+      components: {
+        // ...inputsCustomizations,
+        ...dataDisplayCustomizations,
+        ...feedbackCustomizations,
+        // ...navigationCustomizations,
+        ...surfacesCustomizations,
+      },
+    });
+  }, []);
   return (
     <ThemeProvider theme={theme} disableTransitionOnChange>
       {children}

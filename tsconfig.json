@@ -1,5 +1,10 @@
 {
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "tailwind.config.cjs",
+    "postcss.config.cjs"
+  ],
   "compilerOptions": {
     "strict": true,
     "esModuleInterop": true,
