@@ -14,6 +14,10 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as DashboardImport } from './routes/dashboard'
 import { Route as IndexImport } from './routes/index'
 import { Route as DashboardIndexImport } from './routes/dashboard/index'
+import { Route as DashboardNetRevenueWaterfallImport } from './routes/dashboard/net-revenue-waterfall'
+import { Route as DashboardHistoricalNetRevenueImport } from './routes/dashboard/historical-net-revenue'
+import { Route as DashboardEstimatedRemainingCollectionsImport } from './routes/dashboard/estimated-remaining-collections'
+import { Route as DashboardEstimatedNetRevenueImport } from './routes/dashboard/estimated-net-revenue'
 
 // Create/Update Routes
 
@@ -31,6 +35,30 @@ const DashboardIndexRoute = DashboardIndexImport.update({
   path: '/',
   getParentRoute: () => DashboardRoute,
 } as any)
+
+const DashboardNetRevenueWaterfallRoute =
+  DashboardNetRevenueWaterfallImport.update({
+    path: '/net-revenue-waterfall',
+    getParentRoute: () => DashboardRoute,
+  } as any)
+
+const DashboardHistoricalNetRevenueRoute =
+  DashboardHistoricalNetRevenueImport.update({
+    path: '/historical-net-revenue',
+    getParentRoute: () => DashboardRoute,
+  } as any)
+
+const DashboardEstimatedRemainingCollectionsRoute =
+  DashboardEstimatedRemainingCollectionsImport.update({
+    path: '/estimated-remaining-collections',
+    getParentRoute: () => DashboardRoute,
+  } as any)
+
+const DashboardEstimatedNetRevenueRoute =
+  DashboardEstimatedNetRevenueImport.update({
+    path: '/estimated-net-revenue',
+    getParentRoute: () => DashboardRoute,
+  } as any)
 
 // Populate the FileRoutesByPath interface
 
@@ -50,6 +78,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardImport
       parentRoute: typeof rootRoute
     }
+    '/dashboard/estimated-net-revenue': {
+      id: '/dashboard/estimated-net-revenue'
+      path: '/estimated-net-revenue'
+      fullPath: '/dashboard/estimated-net-revenue'
+      preLoaderRoute: typeof DashboardEstimatedNetRevenueImport
+      parentRoute: typeof DashboardImport
+    }
+    '/dashboard/estimated-remaining-collections': {
+      id: '/dashboard/estimated-remaining-collections'
+      path: '/estimated-remaining-collections'
+      fullPath: '/dashboard/estimated-remaining-collections'
+      preLoaderRoute: typeof DashboardEstimatedRemainingCollectionsImport
+      parentRoute: typeof DashboardImport
+    }
+    '/dashboard/historical-net-revenue': {
+      id: '/dashboard/historical-net-revenue'
+      path: '/historical-net-revenue'
+      fullPath: '/dashboard/historical-net-revenue'
+      preLoaderRoute: typeof DashboardHistoricalNetRevenueImport
+      parentRoute: typeof DashboardImport
+    }
+    '/dashboard/net-revenue-waterfall': {
+      id: '/dashboard/net-revenue-waterfall'
+      path: '/net-revenue-waterfall'
+      fullPath: '/dashboard/net-revenue-waterfall'
+      preLoaderRoute: typeof DashboardNetRevenueWaterfallImport
+      parentRoute: typeof DashboardImport
+    }
     '/dashboard/': {
       id: '/dashboard/'
       path: '/'
@@ -63,10 +119,19 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface DashboardRouteChildren {
+  DashboardEstimatedNetRevenueRoute: typeof DashboardEstimatedNetRevenueRoute
+  DashboardEstimatedRemainingCollectionsRoute: typeof DashboardEstimatedRemainingCollectionsRoute
+  DashboardHistoricalNetRevenueRoute: typeof DashboardHistoricalNetRevenueRoute
+  DashboardNetRevenueWaterfallRoute: typeof DashboardNetRevenueWaterfallRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
 }
 
 const DashboardRouteChildren: DashboardRouteChildren = {
+  DashboardEstimatedNetRevenueRoute: DashboardEstimatedNetRevenueRoute,
+  DashboardEstimatedRemainingCollectionsRoute:
+    DashboardEstimatedRemainingCollectionsRoute,
+  DashboardHistoricalNetRevenueRoute: DashboardHistoricalNetRevenueRoute,
+  DashboardNetRevenueWaterfallRoute: DashboardNetRevenueWaterfallRoute,
   DashboardIndexRoute: DashboardIndexRoute,
 }
 
@@ -77,11 +142,19 @@ const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRouteWithChildren
+  '/dashboard/estimated-net-revenue': typeof DashboardEstimatedNetRevenueRoute
+  '/dashboard/estimated-remaining-collections': typeof DashboardEstimatedRemainingCollectionsRoute
+  '/dashboard/historical-net-revenue': typeof DashboardHistoricalNetRevenueRoute
+  '/dashboard/net-revenue-waterfall': typeof DashboardNetRevenueWaterfallRoute
   '/dashboard/': typeof DashboardIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/dashboard/estimated-net-revenue': typeof DashboardEstimatedNetRevenueRoute
+  '/dashboard/estimated-remaining-collections': typeof DashboardEstimatedRemainingCollectionsRoute
+  '/dashboard/historical-net-revenue': typeof DashboardHistoricalNetRevenueRoute
+  '/dashboard/net-revenue-waterfall': typeof DashboardNetRevenueWaterfallRoute
   '/dashboard': typeof DashboardIndexRoute
 }
 
@@ -89,15 +162,40 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRouteWithChildren
+  '/dashboard/estimated-net-revenue': typeof DashboardEstimatedNetRevenueRoute
+  '/dashboard/estimated-remaining-collections': typeof DashboardEstimatedRemainingCollectionsRoute
+  '/dashboard/historical-net-revenue': typeof DashboardHistoricalNetRevenueRoute
+  '/dashboard/net-revenue-waterfall': typeof DashboardNetRevenueWaterfallRoute
   '/dashboard/': typeof DashboardIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard' | '/dashboard/'
+  fullPaths:
+    | '/'
+    | '/dashboard'
+    | '/dashboard/estimated-net-revenue'
+    | '/dashboard/estimated-remaining-collections'
+    | '/dashboard/historical-net-revenue'
+    | '/dashboard/net-revenue-waterfall'
+    | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard'
-  id: '__root__' | '/' | '/dashboard' | '/dashboard/'
+  to:
+    | '/'
+    | '/dashboard/estimated-net-revenue'
+    | '/dashboard/estimated-remaining-collections'
+    | '/dashboard/historical-net-revenue'
+    | '/dashboard/net-revenue-waterfall'
+    | '/dashboard'
+  id:
+    | '__root__'
+    | '/'
+    | '/dashboard'
+    | '/dashboard/estimated-net-revenue'
+    | '/dashboard/estimated-remaining-collections'
+    | '/dashboard/historical-net-revenue'
+    | '/dashboard/net-revenue-waterfall'
+    | '/dashboard/'
   fileRoutesById: FileRoutesById
 }
 
@@ -133,8 +231,28 @@ export const routeTree = rootRoute
     "/dashboard": {
       "filePath": "dashboard.tsx",
       "children": [
+        "/dashboard/estimated-net-revenue",
+        "/dashboard/estimated-remaining-collections",
+        "/dashboard/historical-net-revenue",
+        "/dashboard/net-revenue-waterfall",
         "/dashboard/"
       ]
+    },
+    "/dashboard/estimated-net-revenue": {
+      "filePath": "dashboard/estimated-net-revenue.tsx",
+      "parent": "/dashboard"
+    },
+    "/dashboard/estimated-remaining-collections": {
+      "filePath": "dashboard/estimated-remaining-collections.tsx",
+      "parent": "/dashboard"
+    },
+    "/dashboard/historical-net-revenue": {
+      "filePath": "dashboard/historical-net-revenue.tsx",
+      "parent": "/dashboard"
+    },
+    "/dashboard/net-revenue-waterfall": {
+      "filePath": "dashboard/net-revenue-waterfall.tsx",
+      "parent": "/dashboard"
     },
     "/dashboard/": {
       "filePath": "dashboard/index.tsx",

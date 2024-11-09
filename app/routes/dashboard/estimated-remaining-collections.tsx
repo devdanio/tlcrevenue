@@ -1,9 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import MainGrid from "~/components/MainGrid";
 
-export const Route = createFileRoute("/dashboard/")({
+export const Route = createFileRoute(
+  "/dashboard/estimated-remaining-collections"
+)({
   loader: async () => {
-    return { crumb: "Overview" };
+    return { crumb: "Collections" };
   },
   component: () => (
     <iframe

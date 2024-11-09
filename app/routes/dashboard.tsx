@@ -81,7 +81,7 @@ function Dashboard(props: { disableCustomTheme?: boolean }) {
 export const Route = createFileRoute("/dashboard")({
   component: () => <Dashboard />,
   beforeLoad: async () => await authStateFn(),
-  // loader: async ({ context }) => {
-  //   return { userId: context.userId };
+  // loader: async () => {
+  //   return { crumb: "Dashboard" };
   // },
 });
