@@ -2,6 +2,9 @@
   "name": "tlcrevenue",
   "version": "1.0.0",
   "main": "index.js",
+  "engines": {
+    "node": "20.x"
+  },
   "scripts": {
     "dev": "vinxi dev",
     "build": "vinxi build",
