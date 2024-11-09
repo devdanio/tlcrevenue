@@ -13,21 +13,21 @@ export default defineConfig({
         },
       },
     },
-    optimizeDeps: {
-      include: ["@mui/material", "@mui/icons-material"],
-      exclude: ["@mui/utils"],
-    },
-    ssr: {
-      noExternal: [
-        "@mui/system",
-        "@mui/icons-material",
-        "@mui/lab",
-        "@mui/material",
-        "@mui/styles",
-        "@mui/x-date-pickers",
-        "@mui/util",
-      ],
-    },
+    // optimizeDeps: {
+    //   include: ["@mui/material", "@mui/icons-material"],
+    //   exclude: ["@mui/utils"],
+    // },
+    // ssr: {
+    //   noExternal: [
+    //     "@mui/system",
+    //     "@mui/icons-material",
+    //     "@mui/lab",
+    //     "@mui/material",
+    //     "@mui/styles",
+    //     "@mui/x-date-pickers",
+    //     "@mui/util",
+    //   ],
+    // },
     plugins: [
       tsConfigPaths({
         projects: ["./tsconfig.json"],
