@@ -35,6 +35,7 @@ function Home() {
   const { isLoaded } = useUser();
 
   return (
+    // temp fix for css sytles, all tailwind css is prefixed with #root
     <div id="root">
       <Box className="h-full w-full bg-gradient-to-b from-[#43b27f] to-[#41b17f] flex items-center justify-center">
         <Box
