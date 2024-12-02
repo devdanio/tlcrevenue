@@ -1,14 +1,10 @@
+import CssBaseline from "@mui/material/CssBaseline";
 import { createFileRoute, redirect, Outlet } from "@tanstack/react-router";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
 import { createServerFn } from "@tanstack/start";
 import { getAuth } from "@clerk/tanstack-start/server";
 
-import * as React from "react";
-import type {} from "@mui/x-date-pickers/themeAugmentation";
-import type {} from "@mui/x-charts/themeAugmentation";
-import type {} from "@mui/x-data-grid/themeAugmentation";
-import type {} from "@mui/x-tree-view/themeAugmentation";
-import { alpha } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import AppNavbar from "~/components/AppNavbar";
@@ -22,6 +18,8 @@ import {
   datePickersCustomizations,
   treeViewCustomizations,
 } from "~/theme/customizations";
+import { request } from "http";
+import { getWebRequest } from "vinxi/http";
 
 const xThemeComponents = {
   ...chartsCustomizations,
@@ -30,26 +28,29 @@ const xThemeComponents = {
   ...treeViewCustomizations,
 };
 
-const authStateFn = createServerFn("GET", async (_, { request }) => {
-  const { userId } = await getAuth(request);
-
-  if (!userId) {
+const fetchClerkAuth = createServerFn({ method: "GET" }).handler(async () => {
+  const user = await getAuth(getWebRequest());
+  if (!user) {
     throw redirect({
       to: "/",
     });
   }
-
-  return { userId };
+  return {
+    user,
+  };
 });
 
+const theme = createTheme();
+
 function Dashboard(props: { disableCustomTheme?: boolean }) {
+  console.log("the dashboard component is beign called");
+
   return (
     <AppTheme {...props} themeComponents={xThemeComponents}>
       <CssBaseline enableColorScheme />
       <Box sx={{ display: "flex" }}>
         <SideMenu />
         <AppNavbar />
-        {/* Main content */}
         <Box
           component="main"
           sx={(theme) => ({
@@ -79,8 +80,13 @@ function Dashboard(props: { disableCustomTheme?: boolean }) {
 }
 
 export const Route = createFileRoute("/dashboard")({
-  component: () => <Dashboard />,
-  beforeLoad: async () => await authStateFn(),
+  component: Dashboard,
+  beforeLoad: async () => {
+    console.log("this is being called");
+
+    return await fetchClerkAuth();
+  },
+  ssr: false,
   // loader: async () => {
   //   return { crumb: "Dashboard" };
   // },

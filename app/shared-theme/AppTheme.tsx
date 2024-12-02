@@ -1,4 +1,3 @@
-import * as React from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import type { ThemeOptions } from "@mui/material/styles";
 import { inputsCustomizations } from "./customizations/inputs";
@@ -7,13 +6,14 @@ import { feedbackCustomizations } from "./customizations/feedback";
 import { navigationCustomizations } from "./customizations/navigation";
 import { surfacesCustomizations } from "./customizations/surfaces";
 import { colorSchemes, typography, shadows, shape } from "./themePrimitives";
+import { useMemo } from "react";
 
 interface AppThemeProps {
   children: React.ReactNode;
 }
 
 export default function AppTheme({ children, themeComponents }: AppThemeProps) {
-  const theme = React.useMemo(() => {
+  const theme = useMemo(() => {
     return createTheme({
       // For more details about CSS variables configuration, see https://mui.com/material-ui/customization/css-theme-variables/configuration/
       // cssVariables: {

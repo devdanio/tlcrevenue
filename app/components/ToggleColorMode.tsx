@@ -1,8 +1,7 @@
-import * as React from 'react';
-import { PaletteMode } from '@mui/material/styles';
-import WbSunnyRoundedIcon from '@mui/icons-material/WbSunnyRounded';
-import ModeNightRoundedIcon from '@mui/icons-material/ModeNightRounded';
-import MenuButton, { MenuButtonProps } from './MenuButton';
+import { PaletteMode } from "@mui/material/styles";
+import WbSunnyRoundedIcon from "@mui/icons-material/WbSunnyRounded";
+import ModeNightRoundedIcon from "@mui/icons-material/ModeNightRounded";
+import MenuButton, { MenuButtonProps } from "./MenuButton";
 
 interface ToggleColorModeProps extends MenuButtonProps {
   mode: PaletteMode;
@@ -21,7 +20,7 @@ export default function ToggleColorMode({
       aria-label="button to toggle theme"
       {...props}
     >
-      {mode === 'dark' ? (
+      {mode === "dark" ? (
         <WbSunnyRoundedIcon fontSize="small" />
       ) : (
         <ModeNightRoundedIcon fontSize="small" />

@@ -11,27 +11,31 @@ import { getAuth } from "@clerk/tanstack-start/server";
 import { Box, Skeleton, Typography } from "@mui/material";
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/start";
+import { getWebRequest } from "vinxi/http";
 
-const authStateFn = createServerFn("GET", async (_, { request }) => {
-  const { userId } = await getAuth(request);
+const fetchClerkAuth = createServerFn({ method: "GET" }).handler(async () => {
+  const user = await getAuth(getWebRequest());
+  console.log("user", user);
 
-  if (userId) {
+  if (user) {
     throw redirect({
       to: "/dashboard",
     });
   }
-
-  return { userId };
+  return {
+    user,
+  };
 });
-
 export const Route = createFileRoute("/")({
   component: Home,
-  beforeLoad: async () => await authStateFn(),
+  beforeLoad: async () => await fetchClerkAuth(),
 });
 
 function Home() {
   const { isLoaded } = useUser();
+  console.log("home is called");
 
+  return <div>alskdjflakjsdflkjasdflkj</div>;
   return (
     <Box className="h-full w-full bg-gradient-to-b from-[#43b27f] to-[#41b17f] flex items-center justify-center">
       <Box

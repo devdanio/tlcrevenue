@@ -1,7 +1,6 @@
-import * as React from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import type { ThemeOptions } from "@mui/material/styles";
-
+import { useMemo } from "react";
 import {
   colorSchemes,
   typography,
@@ -19,7 +18,7 @@ interface AppThemeProps {
 }
 
 export default function AppTheme({ children }: AppThemeProps) {
-  const theme = React.useMemo(() => {
+  const theme = useMemo(() => {
     return createTheme({
       // For more details about CSS variables configuration, see https://mui.com/material-ui/customization/css-theme-variables/configuration/
       cssVariables: {
