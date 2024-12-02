@@ -29,53 +29,47 @@ const xThemeComponents = {
 };
 
 const fetchClerkAuth = createServerFn({ method: "GET" }).handler(async () => {
-  const user = await getAuth(getWebRequest());
-  if (!user) {
+  const { userId } = await getAuth(getWebRequest());
+
+  if (!userId) {
     throw redirect({
       to: "/",
     });
   }
   return {
-    user,
+    userId,
   };
 });
 
-const theme = createTheme();
-
 function Dashboard(props: { disableCustomTheme?: boolean }) {
-  console.log("the dashboard component is beign called");
-
   return (
-    <AppTheme {...props} themeComponents={xThemeComponents}>
-      <CssBaseline enableColorScheme />
-      <Box sx={{ display: "flex" }}>
-        <SideMenu />
-        <AppNavbar />
-        <Box
-          component="main"
-          sx={(theme) => ({
-            flexGrow: 1,
-            // backgroundColor: theme.vars
-            //   ? `rgba(${theme.vars.palette.background.defaultChannel} / 1)`
-            //   : alpha(theme.palette.background.default, 1),
-            overflow: "auto",
-          })}
+    <Box sx={{ display: "flex" }}>
+      <SideMenu />
+      <AppNavbar />
+      <Box
+        component="main"
+        sx={(theme) => ({
+          flexGrow: 1,
+          // backgroundColor: theme.vars
+          //   ? `rgba(${theme.vars.palette.background.defaultChannel} / 1)`
+          //   : alpha(theme.palette.background.default, 1),
+          overflow: "auto",
+        })}
+      >
+        <Stack
+          spacing={2}
+          sx={{
+            alignItems: "center",
+            mx: 3,
+            pb: 5,
+            mt: { xs: 8, md: 0 },
+          }}
         >
-          <Stack
-            spacing={2}
-            sx={{
-              alignItems: "center",
-              mx: 3,
-              pb: 5,
-              mt: { xs: 8, md: 0 },
-            }}
-          >
-            <Header />
-            <Outlet />
-          </Stack>
-        </Box>
+          <Header />
+          <Outlet />
+        </Stack>
       </Box>
-    </AppTheme>
+    </Box>
   );
 }
 

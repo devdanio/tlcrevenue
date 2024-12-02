@@ -8,17 +8,11 @@ import { StyledEngineProvider } from "@mui/material/styles";
 import { ClerkProvider } from "@clerk/tanstack-start";
 import appCSS from "../main.css?url";
 
-import {
-  chartsCustomizations,
-  dataGridCustomizations,
-  datePickersCustomizations,
-  treeViewCustomizations,
-} from "~/theme/customizations";
-
 import "@fontsource-variable/lexend-deca";
 import AppTheme from "~/theme/AppTheme";
 
 export const Route = createRootRoute({
+  ssr: false,
   head: () => ({
     meta: [
       {
@@ -67,16 +61,10 @@ function RootComponent() {
 
   return (
     <ClerkProvider>
-      {/* <StyledEngineProvider injectFirst> */}
-      {/* <AppTheme> */}
-
       <RootDocument>
         <Outlet />
         {/* <TanStackRouterDevtools position="bottom-right" /> */}
       </RootDocument>
-
-      {/* </AppTheme> */}
-      {/* </StyledEngineProvider> */}
     </ClerkProvider>
   );
 }
