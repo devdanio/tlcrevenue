@@ -10,6 +10,8 @@ import MenuContent from "./MenuContent";
 import CardAlert from "./CardAlert";
 import OptionsMenu from "./OptionsMenu";
 import { useUser } from "@clerk/tanstack-start";
+import { FormControlLabel, FormGroup, Switch } from "@mui/material";
+import { useVersion } from "~/hooks/useVersion";
 
 const drawerWidth = 240;
 
@@ -26,6 +28,7 @@ const Drawer = styled(MuiDrawer)({
 
 export default function SideMenu() {
   const user = useUser();
+  const { version, setVersion } = useVersion();
   return (
     <Drawer
       variant="permanent"
@@ -41,10 +44,25 @@ export default function SideMenu() {
           display: "flex",
           mt: "calc(var(--template-frame-height, 0px) + 4px)",
           p: 1.5,
+          // alignItems: "center",
+          flexDirection: "column",
         }}
       >
         {/* <SelectContent /> */}
         TLC Revenue
+        <FormGroup>
+          <FormControlLabel
+            control={
+              <Switch
+                checked={version === "live"}
+                onChange={(e) => {
+                  setVersion(e.target.checked ? "live" : "demo");
+                }}
+              />
+            }
+            label="Live"
+          />
+        </FormGroup>
       </Box>
       <Divider />
       <MenuContent />

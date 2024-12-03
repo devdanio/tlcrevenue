@@ -1,6 +1,6 @@
 // app/routes/__root.tsx
 import { createRootRoute } from "@tanstack/react-router";
-
+import Cookies from "js-cookie";
 import { Outlet, ScrollRestoration } from "@tanstack/react-router";
 import { Meta, Scripts } from "@tanstack/start";
 import { useState, useEffect } from "react";
@@ -10,6 +10,7 @@ import appCSS from "../main.css?url";
 
 import "@fontsource-variable/lexend-deca";
 import AppTheme from "~/theme/AppTheme";
+import { AppContext, AppContextType } from "~/providers/AppProvider";
 
 export const Route = createRootRoute({
   ssr: false,
@@ -51,21 +52,23 @@ export const Route = createRootRoute({
 });
 
 function RootComponent() {
-  const [isBrowser, setIsBrowser] = useState(false);
-  useEffect(() => {
-    console.log("goign to run in tbe browser");
+  const [version, setVersion] = useState<"live" | "demo">(
+    Cookies.get("version") || "live"
+  );
 
-    setIsBrowser(true);
-  }, []);
-  console.log("dasdlfkj alsdkfj ");
-
+  const handleSetVersion = (version: "live" | "demo") => {
+    Cookies.set("version", version);
+    setVersion(version);
+  };
   return (
-    <ClerkProvider>
-      <RootDocument>
-        <Outlet />
-        {/* <TanStackRouterDevtools position="bottom-right" /> */}
-      </RootDocument>
-    </ClerkProvider>
+    <AppContext.Provider value={{ version, setVersion: handleSetVersion }}>
+      <ClerkProvider>
+        <RootDocument>
+          <Outlet />
+          {/* <TanStackRouterDevtools position="bottom-right" /> */}
+        </RootDocument>
+      </ClerkProvider>
+    </AppContext.Provider>
   );
 }
 
