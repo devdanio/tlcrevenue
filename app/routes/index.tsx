@@ -8,7 +8,7 @@ import {
   useUser,
 } from "@clerk/tanstack-start";
 import { getAuth } from "@clerk/tanstack-start/server";
-import { Box, Skeleton, Typography } from "@mui/material";
+import { Box, Skeleton, Stack, Typography } from "@mui/material";
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/start";
 import { getWebRequest } from "vinxi/http";
@@ -39,19 +39,20 @@ function Home() {
     <div id="root">
       <Box className="h-full w-full bg-gradient-to-b from-[#43b27f] to-[#41b17f] flex items-center justify-center">
         <Box
-          className="bg-white rounded-xl p-20 shadow-md animate-[fade-in-down_1s_ease-out]
+          className="bg-white rounded-xl overflow-hidden p-8 shadow-md animate-[fade-in-down_1s_ease-out]
                       opacity-0 [animation-fill-mode:forwards] "
         >
           {!isLoaded ? (
             <Skeleton variant="circular" />
           ) : (
-            <>
-              <Typography
+            <Stack gap={2}>
+              <img src="/images/logo-2.png" />
+              {/* <Typography
                 variant="h1"
                 className="prose-headings:h1 mb-4 text-gray-700"
               >
                 TLC Revenue
-              </Typography>
+              </Typography> */}
               <SignedIn>
                 <p>You are signed in</p>
                 <UserButton />
@@ -60,7 +61,7 @@ function Home() {
               <SignedOut>
                 <SignInButton className="text-white bg-[#206e4a] rounded-lg w-full py-4 border-0 cursor-pointer hover:shadow-lg transition-all text-lg  " />
               </SignedOut>
-            </>
+            </Stack>
           )}
         </Box>
       </Box>

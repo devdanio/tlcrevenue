@@ -13,7 +13,7 @@ import { useUser } from "@clerk/tanstack-start";
 import { FormControlLabel, FormGroup, Switch } from "@mui/material";
 import { useVersion } from "~/hooks/useVersion";
 
-const drawerWidth = 240;
+const drawerWidth = 270;
 
 const Drawer = styled(MuiDrawer)({
   width: drawerWidth,
