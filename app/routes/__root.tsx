@@ -9,8 +9,8 @@ import { ClerkProvider } from "@clerk/tanstack-start";
 import appCSS from "../main.css?url";
 
 import "@fontsource-variable/lexend-deca";
-import AppTheme from "~/theme/AppTheme";
-import { AppContext, AppContextType } from "~/providers/AppProvider";
+import AppTheme from "@/theme/AppTheme";
+import { AppContext, AppContextType } from "@/providers/AppProvider";
 
 export const Route = createRootRoute({
   ssr: false,

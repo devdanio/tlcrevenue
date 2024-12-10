@@ -1,4 +1,4 @@
-import { useVersion } from "~/hooks/useVersion";
+import { useVersion } from "@/hooks/useVersion";
 
 export const PBIDashboard = () => {
   const { version } = useVersion();

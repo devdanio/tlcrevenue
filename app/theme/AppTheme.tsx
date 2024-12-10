@@ -6,12 +6,12 @@ import {
   typography,
   shadows,
   shape,
-} from "~/shared-theme/themePrimitives";
-import { dataDisplayCustomizations } from "~/shared-theme/customizations/dataDisplay";
-import { feedbackCustomizations } from "~/shared-theme/customizations/feedback";
-import { inputsCustomizations } from "~/shared-theme/customizations/inputs";
-import { navigationCustomizations } from "~/shared-theme/customizations/navigation";
-import { surfacesCustomizations } from "~/shared-theme/customizations/surfaces";
+} from "@/shared-theme/themePrimitives";
+import { dataDisplayCustomizations } from "@/shared-theme/customizations/dataDisplay";
+import { feedbackCustomizations } from "@/shared-theme/customizations/feedback";
+import { inputsCustomizations } from "@/shared-theme/customizations/inputs";
+import { navigationCustomizations } from "@/shared-theme/customizations/navigation";
+import { surfacesCustomizations } from "@/shared-theme/customizations/surfaces";
 
 interface AppThemeProps {
   children: React.ReactNode;

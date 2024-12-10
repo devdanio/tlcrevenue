@@ -11,7 +11,7 @@ import CardAlert from "./CardAlert";
 import OptionsMenu from "./OptionsMenu";
 import { useUser } from "@clerk/tanstack-start";
 import { FormControlLabel, FormGroup, Switch } from "@mui/material";
-import { useVersion } from "~/hooks/useVersion";
+import { useVersion } from "@/hooks/useVersion";
 
 const drawerWidth = 270;
 

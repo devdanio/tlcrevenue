@@ -21,7 +21,7 @@ import {
   useNavigate,
   useRouterState,
 } from "@tanstack/react-router";
-import { FileRoutesByFullPath, FileRouteTypes } from "~/routeTree.gen";
+import { FileRoutesByFullPath, FileRouteTypes } from "@/routeTree.gen";
 
 type MenuItem = {
   text: string;

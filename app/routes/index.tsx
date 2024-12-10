@@ -1,3 +1,5 @@
+import { Progress } from "@/components/ui/progress";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   SignedIn,
   UserButton,
@@ -8,7 +10,7 @@ import {
   useUser,
 } from "@clerk/tanstack-start";
 import { getAuth } from "@clerk/tanstack-start/server";
-import { Box, Skeleton, Stack, Typography } from "@mui/material";
+
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/start";
 import { getWebRequest } from "vinxi/http";
@@ -37,15 +39,15 @@ function Home() {
   return (
     // temp fix for css sytles, all tailwind css is prefixed with #root
     <div id="root">
-      <Box className="h-full w-full bg-gradient-to-b from-[#43b27f] to-[#41b17f] flex items-center justify-center">
-        <Box
+      <div className="h-full w-full bg-gradient-to-b from-[#43b27f] to-[#41b17f] flex items-center justify-center">
+        <div
           className="bg-white rounded-xl overflow-hidden p-8 shadow-md animate-[fade-in-down_1s_ease-out]
                       opacity-0 [animation-fill-mode:forwards] "
         >
           {!isLoaded ? (
-            <Skeleton variant="circular" />
+            <Skeleton className="rounded-full w-24 h-24" />
           ) : (
-            <Stack gap={2}>
+            <div className="flex flex-col gap-2">
               <img src="/images/logo-2.png" />
               {/* <Typography
                 variant="h1"
@@ -61,10 +63,10 @@ function Home() {
               <SignedOut>
                 <SignInButton className="text-white bg-[#206e4a] rounded-lg w-full py-4 border-0 cursor-pointer hover:shadow-lg transition-all text-lg  " />
               </SignedOut>
-            </Stack>
+            </div>
           )}
-        </Box>
-      </Box>
+        </div>
+      </div>
     </div>
   );
 }

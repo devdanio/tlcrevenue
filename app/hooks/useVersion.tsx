@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 
-import { AppContext } from "~/providers/AppProvider";
+import { AppContext } from "@/providers/AppProvider";
 
 export const useVersion = () => {
   const context = useContext(AppContext);
