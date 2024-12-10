@@ -8,7 +8,7 @@ import {
   Settings,
   User2,
 } from "lucide-react";
-import { Link } from "@tanstack/react-router";
+import { createLink, Link } from "@tanstack/react-router";
 
 import {
   Sidebar,
@@ -40,29 +40,15 @@ const items = [
 
 export function AppSidebar() {
   const { user } = useUser();
+  const DropDownLink = createLink(DropdownMenuItem);
   return (
     <Sidebar>
       <SidebarHeader>
-        {/* <SidebarMenu> */}
-        {/* <SidebarMenuItem>
-            <SidebarMenuButton size="lg" asChild>
-              <a href="#">
-                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                  <GalleryVerticalEnd className="size-4" />
-                </div>
-                <div className="flex flex-col gap-0.5 leading-none">
-                  <span className="font-semibold">Documentation</span>
-                  <span className="">v1.0.0</span>
-                </div>
-              </a>
-            </SidebarMenuButton>
-          </SidebarMenuItem> */}
         <img
           src="/images/horizontal-logo.png"
           alt="TLC Revenue logo"
           className="h-[40px] w-fit"
         />
-        {/* </SidebarMenu> */}
       </SidebarHeader>
 
       <SidebarContent>
@@ -98,13 +84,7 @@ export function AppSidebar() {
                 className="w-[--radix-popper-anchor-width]"
               >
                 <DropdownMenuItem>
-                  <span>Account</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <span>Billing</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <span>Sign out</span>
+                  <Link to="/dashboard">Account</Link>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
