@@ -5,11 +5,13 @@ import Drawer, { drawerClasses } from "@mui/material/Drawer";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
+import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
 import NotificationsRoundedIcon from "@mui/icons-material/NotificationsRounded";
 
 import MenuButton from "./MenuButton";
 import MenuContent from "./MenuContent";
 import CardAlert from "./CardAlert";
+import { createLink } from "@tanstack/react-router";
 
 interface SideMenuMobileProps {
   open: boolean | undefined;
@@ -20,6 +22,7 @@ export default function SideMenuMobile({
   open,
   toggleDrawer,
 }: SideMenuMobileProps) {
+  const ButtonLink = createLink(Button);
   return (
     <Drawer
       anchor="right"
@@ -64,6 +67,15 @@ export default function SideMenuMobile({
         </Stack>
 
         <Stack sx={{ p: 2 }}>
+          <ButtonLink
+            variant="outlined"
+            fullWidth
+            startIcon={<PersonRoundedIcon />}
+            to="/dashboard/settings/profile"
+          >
+            Profile
+          </ButtonLink>
+          <Divider />
           <Button
             variant="outlined"
             fullWidth

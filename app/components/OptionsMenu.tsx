@@ -11,6 +11,7 @@ import MoreVertRoundedIcon from "@mui/icons-material/MoreVertRounded";
 import MenuButton from "./MenuButton";
 import { useClerk } from "@clerk/tanstack-start";
 import React, { useState } from "react";
+import { createLink } from "@tanstack/react-router";
 
 const MenuItem = styled(MuiMenuItem)({
   margin: "2px 0",
@@ -26,6 +27,8 @@ export default function OptionsMenu() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const MenuItemLink = createLink(MenuItem);
   return (
     <React.Fragment>
       <MenuButton
@@ -55,8 +58,10 @@ export default function OptionsMenu() {
           },
         }}
       >
-        {/* <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
+        <MenuItemLink to="/dashboard/settings/profile">Profile</MenuItemLink>
+        <Divider />
+
+        {/* <MenuItem onClick={handleClose}>My account</MenuItem>
         <Divider />
         <MenuItem onClick={handleClose}>Settings</MenuItem> */}
         {/* <Divider /> */}

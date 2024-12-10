@@ -33,7 +33,7 @@ export const Route = createRootRoute({
       {
         rel: "preconnect",
         href: "https://fonts.gstatic.com",
-        crossorigin: true,
+        crossOrigin: true,
       },
     ],
     links: [
