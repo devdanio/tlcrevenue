@@ -21,6 +21,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useClerk, useUser } from "@clerk/tanstack-start";
+import { Switch } from "./ui/switch";
+import { Label } from "./ui/label";
+import { useVersion } from "@/hooks/useVersion";
 
 const items = [
   {
@@ -35,7 +38,7 @@ export function AppSidebar() {
   const { signOut } = useClerk();
 
   const DropDownLink = createLink(DropdownMenuItem);
-  console.log("user", user);
+  const { version, setVersion } = useVersion();
 
   const handleLogOut = () => {
     signOut({
@@ -44,12 +47,22 @@ export function AppSidebar() {
   };
   return (
     <Sidebar>
-      <SidebarHeader>
+      <SidebarHeader className="flex flex-row justify-between items-center pr-4">
         <img
           src="/images/horizontal-logo.png"
           alt="TLC Revenue logo"
           className="h-[40px] w-fit"
         />
+        <div className="flex flex-col gap-1">
+          <Switch
+            id="mode"
+            checked={version === "live"}
+            onCheckedChange={() => {
+              setVersion(version === "live" ? "demo" : "live");
+            }}
+          />
+          <Label htmlFor="mode">Live</Label>
+        </div>
       </SidebarHeader>
 
       <SidebarContent>

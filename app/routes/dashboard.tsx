@@ -19,28 +19,27 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
 } from "@/components/ui/breadcrumb";
-import {
-  OrganizationSwitcher,
-  useOrganizationList,
-} from "@clerk/tanstack-start";
+import { useOrganizationList } from "@clerk/tanstack-start";
 import { useEffect } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 
-const fetchClerkAuth = createServerFn({ method: "GET" }).handler(async () => {
-  const { userId, orgPermissions, orgId } = await getAuth(getWebRequest());
+const fetchClerkAuth = createServerFn({ method: "GET" }).handler(
+  async (ctx) => {
+    const { userId, orgPermissions, orgId } = await getAuth(getWebRequest());
 
-  const hasActiveOrg = !!orgId;
+    const hasActiveOrg = !!orgId;
 
-  if (!userId) {
-    throw redirect({
-      to: "/",
-    });
+    if (!userId) {
+      throw redirect({
+        to: "/",
+      });
+    }
+    return {
+      userId,
+      hasActiveOrg,
+    };
   }
-  return {
-    userId,
-    hasActiveOrg,
-  };
-});
+);
 
 export const Route = createFileRoute("/dashboard")({
   component: Dashboard,

@@ -1,11 +1,11 @@
 import { useVersion } from "@/hooks/useVersion";
 
-export const PBIDashboard = () => {
+export const PBIDashboard = ({ url }: { url?: string }) => {
   const { version } = useVersion();
 
   const src =
     version === "live"
-      ? "https://app.powerbi.com/view?r=eyJrIjoiNDlmN2Q2OWItMzAwYS00ZjgyLThkMzEtODgxNDQwOTY3N2NkIiwidCI6IjY1ZTQ5N2M5LTMyNTQtNDVmZi05YTFlLWQyMzQ2MjM0MWVkMCIsImMiOjN9&pageName=9d3b47b24628bfab1f13"
+      ? url
       : "https://app.powerbi.com/view?r=eyJrIjoiNTdiNTExM2EtMWNjYS00ZWQ1LWIwZTEtYjVlNGE1NDg4ZDQ0IiwidCI6IjY1ZTQ5N2M5LTMyNTQtNDVmZi05YTFlLWQyMzQ2MjM0MWVkMCIsImMiOjN9";
   return (
     <iframe

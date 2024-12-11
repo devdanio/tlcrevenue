@@ -1,5 +1,6 @@
 import { createRouter as createTanStackRouter } from "@tanstack/react-router";
 import { routeTree } from "./routeTree.gen";
+import { PrismaClient } from "@prisma/client";
 
 export function createRouter() {
   const router = createTanStackRouter({
@@ -10,6 +11,7 @@ export function createRouter() {
 
   return router;
 }
+type dan = ReturnType<typeof createRouter>;
 
 declare module "@tanstack/react-router" {
   interface Register {
