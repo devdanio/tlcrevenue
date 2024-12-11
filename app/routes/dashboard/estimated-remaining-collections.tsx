@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { PBIDashboard } from "~/components/PBIDashboard";
+import { PBIDashboard } from "@/components/PBIDashboard";
 
 export const Route = createFileRoute(
   "/dashboard/estimated-remaining-collections"
