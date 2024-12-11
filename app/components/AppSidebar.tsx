@@ -36,6 +36,8 @@ export function AppSidebar() {
   const { user } = useUser();
   const { signOut } = useClerk();
 
+  const isAdmin =
+    user?.primaryEmailAddress?.emailAddress.includes("tlcrevenue.com");
   const DropDownLink = createLink(DropdownMenuItem);
   const { version, setVersion } = useVersion();
 
@@ -100,11 +102,14 @@ export function AppSidebar() {
                   Account
                 </DropDownLink>
 
-                <Protect role="org:app_admin">
+                {/* <Protect role="org:app_admin"> */}
+                {isAdmin ? (
                   <DropDownLink to="/dashboard/settings/app">
                     App settings
                   </DropDownLink>
-                </Protect>
+                ) : null}
+
+                {/* </Protect> */}
 
                 <DropdownMenuItem onClick={handleLogOut}>
                   <span>Log out</span>
