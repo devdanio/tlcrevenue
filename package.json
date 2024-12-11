@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "vinxi dev",
-    "build": "vinxi build",
+    "build": "prisma generate && vinxi build",
     "start": "vinxi start"
   },
   "type": "module",
