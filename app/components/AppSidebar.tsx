@@ -42,9 +42,7 @@ export function AppSidebar() {
   const { version, setVersion } = useVersion();
 
   const handleLogOut = () => {
-    signOut({
-      redirectUrl: "/",
-    });
+    signOut();
   };
   return (
     <Sidebar>
