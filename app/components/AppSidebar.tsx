@@ -37,7 +37,8 @@ export function AppSidebar() {
   const { signOut } = useClerk();
 
   const isAdmin =
-    user?.primaryEmailAddress?.emailAddress.includes("tlcrevenue.com");
+    user?.primaryEmailAddress?.emailAddress.includes("tlcrevenue.com") &&
+    !user?.primaryEmailAddress?.emailAddress.includes("demotestuser1");
   const DropDownLink = createLink(DropdownMenuItem);
   const { version, setVersion } = useVersion();
 
