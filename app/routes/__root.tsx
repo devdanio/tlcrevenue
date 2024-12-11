@@ -1,10 +1,10 @@
-// app/routes/__root.tsx
 import { createRootRoute } from "@tanstack/react-router";
 import Cookies from "js-cookie";
+import { Toaster } from "@/components/ui/toaster";
+
 import { Outlet, ScrollRestoration } from "@tanstack/react-router";
 import { Meta, Scripts } from "@tanstack/start";
 import { useState, useEffect } from "react";
-import { StyledEngineProvider } from "@mui/material/styles";
 import { ClerkProvider } from "@clerk/tanstack-start";
 import appCSS from "../main.css?url";
 
@@ -66,6 +66,7 @@ function RootComponent() {
         <RootDocument>
           <Outlet />
           {/* <TanStackRouterDevtools position="bottom-right" /> */}
+          <Toaster />
         </RootDocument>
       </ClerkProvider>
     </AppContext.Provider>

@@ -18,6 +18,8 @@ import { Route as DashboardNetRevenueWaterfallImport } from './routes/dashboard/
 import { Route as DashboardHistoricalNetRevenueImport } from './routes/dashboard/historical-net-revenue'
 import { Route as DashboardEstimatedRemainingCollectionsImport } from './routes/dashboard/estimated-remaining-collections'
 import { Route as DashboardEstimatedNetRevenueImport } from './routes/dashboard/estimated-net-revenue'
+import { Route as DashboardSettingsProfileImport } from './routes/dashboard/settings/profile'
+import { Route as DashboardSettingsAppImport } from './routes/dashboard/settings/app'
 
 // Create/Update Routes
 
@@ -66,6 +68,18 @@ const DashboardEstimatedNetRevenueRoute =
     path: '/estimated-net-revenue',
     getParentRoute: () => DashboardRoute,
   } as any)
+
+const DashboardSettingsProfileRoute = DashboardSettingsProfileImport.update({
+  id: '/settings/profile',
+  path: '/settings/profile',
+  getParentRoute: () => DashboardRoute,
+} as any)
+
+const DashboardSettingsAppRoute = DashboardSettingsAppImport.update({
+  id: '/settings/app',
+  path: '/settings/app',
+  getParentRoute: () => DashboardRoute,
+} as any)
 
 // Populate the FileRoutesByPath interface
 
@@ -120,6 +134,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardIndexImport
       parentRoute: typeof DashboardImport
     }
+    '/dashboard/settings/app': {
+      id: '/dashboard/settings/app'
+      path: '/settings/app'
+      fullPath: '/dashboard/settings/app'
+      preLoaderRoute: typeof DashboardSettingsAppImport
+      parentRoute: typeof DashboardImport
+    }
+    '/dashboard/settings/profile': {
+      id: '/dashboard/settings/profile'
+      path: '/settings/profile'
+      fullPath: '/dashboard/settings/profile'
+      preLoaderRoute: typeof DashboardSettingsProfileImport
+      parentRoute: typeof DashboardImport
+    }
   }
 }
 
@@ -131,6 +159,8 @@ interface DashboardRouteChildren {
   DashboardHistoricalNetRevenueRoute: typeof DashboardHistoricalNetRevenueRoute
   DashboardNetRevenueWaterfallRoute: typeof DashboardNetRevenueWaterfallRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
+  DashboardSettingsAppRoute: typeof DashboardSettingsAppRoute
+  DashboardSettingsProfileRoute: typeof DashboardSettingsProfileRoute
 }
 
 const DashboardRouteChildren: DashboardRouteChildren = {
@@ -140,6 +170,8 @@ const DashboardRouteChildren: DashboardRouteChildren = {
   DashboardHistoricalNetRevenueRoute: DashboardHistoricalNetRevenueRoute,
   DashboardNetRevenueWaterfallRoute: DashboardNetRevenueWaterfallRoute,
   DashboardIndexRoute: DashboardIndexRoute,
+  DashboardSettingsAppRoute: DashboardSettingsAppRoute,
+  DashboardSettingsProfileRoute: DashboardSettingsProfileRoute,
 }
 
 const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
@@ -154,6 +186,8 @@ export interface FileRoutesByFullPath {
   '/dashboard/historical-net-revenue': typeof DashboardHistoricalNetRevenueRoute
   '/dashboard/net-revenue-waterfall': typeof DashboardNetRevenueWaterfallRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/dashboard/settings/app': typeof DashboardSettingsAppRoute
+  '/dashboard/settings/profile': typeof DashboardSettingsProfileRoute
 }
 
 export interface FileRoutesByTo {
@@ -163,6 +197,8 @@ export interface FileRoutesByTo {
   '/dashboard/historical-net-revenue': typeof DashboardHistoricalNetRevenueRoute
   '/dashboard/net-revenue-waterfall': typeof DashboardNetRevenueWaterfallRoute
   '/dashboard': typeof DashboardIndexRoute
+  '/dashboard/settings/app': typeof DashboardSettingsAppRoute
+  '/dashboard/settings/profile': typeof DashboardSettingsProfileRoute
 }
 
 export interface FileRoutesById {
@@ -174,6 +210,8 @@ export interface FileRoutesById {
   '/dashboard/historical-net-revenue': typeof DashboardHistoricalNetRevenueRoute
   '/dashboard/net-revenue-waterfall': typeof DashboardNetRevenueWaterfallRoute
   '/dashboard/': typeof DashboardIndexRoute
+  '/dashboard/settings/app': typeof DashboardSettingsAppRoute
+  '/dashboard/settings/profile': typeof DashboardSettingsProfileRoute
 }
 
 export interface FileRouteTypes {
@@ -186,6 +224,8 @@ export interface FileRouteTypes {
     | '/dashboard/historical-net-revenue'
     | '/dashboard/net-revenue-waterfall'
     | '/dashboard/'
+    | '/dashboard/settings/app'
+    | '/dashboard/settings/profile'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -194,6 +234,8 @@ export interface FileRouteTypes {
     | '/dashboard/historical-net-revenue'
     | '/dashboard/net-revenue-waterfall'
     | '/dashboard'
+    | '/dashboard/settings/app'
+    | '/dashboard/settings/profile'
   id:
     | '__root__'
     | '/'
@@ -203,6 +245,8 @@ export interface FileRouteTypes {
     | '/dashboard/historical-net-revenue'
     | '/dashboard/net-revenue-waterfall'
     | '/dashboard/'
+    | '/dashboard/settings/app'
+    | '/dashboard/settings/profile'
   fileRoutesById: FileRoutesById
 }
 
@@ -240,7 +284,9 @@ export const routeTree = rootRoute
         "/dashboard/estimated-remaining-collections",
         "/dashboard/historical-net-revenue",
         "/dashboard/net-revenue-waterfall",
-        "/dashboard/"
+        "/dashboard/",
+        "/dashboard/settings/app",
+        "/dashboard/settings/profile"
       ]
     },
     "/dashboard/estimated-net-revenue": {
@@ -261,6 +307,14 @@ export const routeTree = rootRoute
     },
     "/dashboard/": {
       "filePath": "dashboard/index.tsx",
+      "parent": "/dashboard"
+    },
+    "/dashboard/settings/app": {
+      "filePath": "dashboard/settings/app.tsx",
+      "parent": "/dashboard"
+    },
+    "/dashboard/settings/profile": {
+      "filePath": "dashboard/settings/profile.tsx",
       "parent": "/dashboard"
     }
   }

@@ -2,7 +2,6 @@ import { useVersion } from "@/hooks/useVersion";
 
 export const PBIDashboard = () => {
   const { version } = useVersion();
-  console.log("the version changed", version);
 
   const src =
     version === "live"

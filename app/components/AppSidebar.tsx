@@ -1,14 +1,6 @@
-import {
-  Calendar,
-  ChevronUp,
-  GalleryVerticalEnd,
-  Home,
-  Inbox,
-  Search,
-  Settings,
-  User2,
-} from "lucide-react";
+import { ChevronUp, Home, User2 } from "lucide-react";
 import { createLink, Link } from "@tanstack/react-router";
+import { Protect } from "@clerk/tanstack-start";
 
 import {
   Sidebar,
@@ -28,7 +20,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useUser } from "@clerk/tanstack-start";
+import { useClerk, useUser } from "@clerk/tanstack-start";
 
 const items = [
   {
@@ -40,7 +32,16 @@ const items = [
 
 export function AppSidebar() {
   const { user } = useUser();
+  const { signOut } = useClerk();
+
   const DropDownLink = createLink(DropdownMenuItem);
+  console.log("user", user);
+
+  const handleLogOut = () => {
+    signOut({
+      redirectUrl: "/",
+    });
+  };
   return (
     <Sidebar>
       <SidebarHeader>
@@ -83,8 +84,18 @@ export function AppSidebar() {
                 side="top"
                 className="w-[--radix-popper-anchor-width]"
               >
-                <DropdownMenuItem>
-                  <Link to="/dashboard">Account</Link>
+                <DropDownLink to="/dashboard/settings/profile">
+                  Account
+                </DropDownLink>
+
+                <Protect role="org:app_admin">
+                  <DropDownLink to="/dashboard/settings/app">
+                    App settings
+                  </DropDownLink>
+                </Protect>
+
+                <DropdownMenuItem onClick={handleLogOut}>
+                  <span>Log out</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

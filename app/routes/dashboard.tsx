@@ -1,29 +1,11 @@
-import CssBaseline from "@mui/material/CssBaseline";
 import {
   createFileRoute,
   redirect,
   Outlet,
   createLink,
 } from "@tanstack/react-router";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-
 import { createServerFn } from "@tanstack/start";
 import { getAuth } from "@clerk/tanstack-start/server";
-
-import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
-import AppNavbar from "@/components/AppNavbar";
-import Header from "@/components/Header";
-import MainGrid from "@/components/MainGrid";
-import SideMenu from "@/components/SideMenu";
-import AppTheme from "@/theme/AppTheme";
-import {
-  chartsCustomizations,
-  dataGridCustomizations,
-  datePickersCustomizations,
-  treeViewCustomizations,
-} from "@/theme/customizations";
-import { request } from "http";
 import { getWebRequest } from "vinxi/http";
 import {
   SidebarInset,
@@ -34,15 +16,20 @@ import { AppSidebar } from "@/components/AppSidebar";
 import { Separator } from "@radix-ui/react-separator";
 import {
   Breadcrumb,
-  BreadcrumbList,
   BreadcrumbItem,
   BreadcrumbLink,
-  BreadcrumbSeparator,
-  BreadcrumbPage,
 } from "@/components/ui/breadcrumb";
+import {
+  OrganizationSwitcher,
+  useOrganizationList,
+} from "@clerk/tanstack-start";
+import { useEffect } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const fetchClerkAuth = createServerFn({ method: "GET" }).handler(async () => {
-  const { userId } = await getAuth(getWebRequest());
+  const { userId, orgPermissions, orgId } = await getAuth(getWebRequest());
+
+  const hasActiveOrg = !!orgId;
 
   if (!userId) {
     throw redirect({
@@ -51,21 +38,37 @@ const fetchClerkAuth = createServerFn({ method: "GET" }).handler(async () => {
   }
   return {
     userId,
+    hasActiveOrg,
   };
 });
 
 export const Route = createFileRoute("/dashboard")({
   component: Dashboard,
   beforeLoad: async () => {
-    console.log("this is being called");
-
     return await fetchClerkAuth();
   },
   ssr: false,
 });
 
-function Dashboard(props: { disableCustomTheme?: boolean }) {
+function Dashboard() {
   const CrumbLink = createLink(BreadcrumbLink);
+  const { isLoaded, setActive, userMemberships } = useOrganizationList({
+    userMemberships: {
+      infinite: true,
+    },
+  });
+
+  const organization = userMemberships.data?.[0]?.organization.id;
+  useEffect(() => {
+    setActive?.({
+      organization,
+    });
+  }, [organization]);
+
+  if (!isLoaded) {
+    return <Skeleton className="h-[125px] w-[250px] rounded-xl" />;
+  }
+
   return (
     <>
       <SidebarProvider>
