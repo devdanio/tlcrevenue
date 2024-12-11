@@ -11,7 +11,6 @@ export function createRouter() {
 
   return router;
 }
-type dan = ReturnType<typeof createRouter>;
 
 declare module "@tanstack/react-router" {
   interface Register {

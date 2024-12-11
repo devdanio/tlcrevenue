@@ -1,4 +1,4 @@
-import { createRootRoute } from "@tanstack/react-router";
+import { createRootRoute, getRouteApi } from "@tanstack/react-router";
 import Cookies from "js-cookie";
 import { Toaster } from "@/components/ui/toaster";
 
@@ -9,7 +9,6 @@ import { ClerkProvider } from "@clerk/tanstack-start";
 import appCSS from "../main.css?url";
 
 import "@fontsource-variable/lexend-deca";
-import AppTheme from "@/theme/AppTheme";
 import { AppContext, AppContextType } from "@/providers/AppProvider";
 
 export const Route = createRootRoute({
@@ -60,15 +59,14 @@ function RootComponent() {
     Cookies.set("version", version);
     setVersion(version);
   };
+
   return (
     <AppContext.Provider value={{ version, setVersion: handleSetVersion }}>
-      <ClerkProvider>
-        <RootDocument>
-          <Outlet />
-          {/* <TanStackRouterDevtools position="bottom-right" /> */}
-          <Toaster />
-        </RootDocument>
-      </ClerkProvider>
+      <RootDocument>
+        <Outlet />
+        {/* <TanStackRouterDevtools position="bottom-right" /> */}
+        <Toaster />
+      </RootDocument>
     </AppContext.Provider>
   );
 }
@@ -77,15 +75,17 @@ function RootDocument({ children }: { children: React.ReactNode }) {
   console.log("");
 
   return (
-    <html>
-      <head>
-        <Meta />
-      </head>
-      <body>
-        {children}
-        <ScrollRestoration />
-        <Scripts />
-      </body>
-    </html>
+    <ClerkProvider>
+      <html>
+        <head>
+          <Meta />
+        </head>
+        <body>
+          {children}
+          <ScrollRestoration />
+          <Scripts />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
