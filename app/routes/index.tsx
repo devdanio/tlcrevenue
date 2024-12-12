@@ -63,7 +63,10 @@ function Home() {
                 <SignOutButton />
               </SignedIn>
               <SignedOut>
-                <SignInButton className="text-white bg-[#206e4a] rounded-lg w-full py-4 border-0 cursor-pointer hover:shadow-lg transition-all text-lg  " />
+                <SignInButton
+                  fallbackRedirectUrl={"/dashboard"}
+                  className="text-white bg-[#206e4a] rounded-lg w-full py-4 border-0 cursor-pointer hover:shadow-lg transition-all text-lg  "
+                />
               </SignedOut>
             </div>
           )}

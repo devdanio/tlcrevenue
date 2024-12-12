@@ -106,7 +106,7 @@ export function AppSidebar() {
 
                 {/* </Protect> */}
 
-                <SignOutButton>
+                <SignOutButton redirectUrl="/">
                   <DropdownMenuItem>Log out</DropdownMenuItem>
                 </SignOutButton>
               </DropdownMenuContent>
