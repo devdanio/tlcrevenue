@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
@@ -11,7 +12,12 @@ import {
 } from "@clerk/tanstack-start";
 import { getAuth } from "@clerk/tanstack-start/server";
 
-import { createFileRoute, redirect } from "@tanstack/react-router";
+import {
+  createFileRoute,
+  createLink,
+  Link,
+  redirect,
+} from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/start";
 import { getWebRequest } from "vinxi/http";
 
@@ -38,6 +44,8 @@ export const Route = createFileRoute("/")({
 function Home() {
   const { isLoaded } = useUser();
 
+  const ButtonLink = createLink(Button);
+
   return (
     // temp fix for css sytles, all tailwind css is prefixed with #root
     <div id="root">
@@ -58,14 +66,14 @@ function Home() {
                 TLC Revenue
               </Typography> */}
               <SignedIn>
-                <p>You are signed in</p>
-                <UserButton />
+                <ButtonLink to="/dashboard">Go to dashboard </ButtonLink>
                 <SignOutButton />
               </SignedIn>
               <SignedOut>
                 <SignInButton
                   fallbackRedirectUrl={"/dashboard"}
-                  className="text-white bg-[#206e4a] rounded-lg w-full py-4 border-0 cursor-pointer hover:shadow-lg transition-all text-lg  "
+                  forceRedirectUrl={"/dashboard"}
+                  className="text-white bg-[#206e4a] rounded-lg w-full py-4 border-0 cursor-pointer hover:shadow-lg transition-all text-lg"
                 />
               </SignedOut>
             </div>
