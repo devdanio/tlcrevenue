@@ -1,6 +1,6 @@
 import { ChevronUp, Home, User2 } from "lucide-react";
 import { createLink, Link } from "@tanstack/react-router";
-import { Protect } from "@clerk/tanstack-start";
+import { Protect, SignOutButton } from "@clerk/tanstack-start";
 
 import {
   Sidebar,
@@ -34,7 +34,6 @@ const items = [
 
 export function AppSidebar() {
   const { user } = useUser();
-  const { signOut } = useClerk();
 
   const isAdmin =
     user?.primaryEmailAddress?.emailAddress.includes("tlcrevenue.com") &&
@@ -42,9 +41,6 @@ export function AppSidebar() {
   const DropDownLink = createLink(DropdownMenuItem);
   const { version, setVersion } = useVersion();
 
-  const handleLogOut = () => {
-    signOut();
-  };
   return (
     <Sidebar>
       <SidebarHeader className="flex flex-row justify-between items-center pr-4">
@@ -110,9 +106,9 @@ export function AppSidebar() {
 
                 {/* </Protect> */}
 
-                <DropdownMenuItem onClick={handleLogOut}>
-                  <span>Log out</span>
-                </DropdownMenuItem>
+                <SignOutButton>
+                  <DropdownMenuItem>Log out</DropdownMenuItem>
+                </SignOutButton>
               </DropdownMenuContent>
             </DropdownMenu>
           </SidebarMenuItem>

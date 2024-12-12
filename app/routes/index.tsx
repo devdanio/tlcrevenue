@@ -19,7 +19,7 @@ const fetchClerkAuth = createServerFn({ method: "GET" }).handler(async () => {
   const { userId } = await getAuth(getWebRequest());
 
   if (userId) {
-    console.log("home page is going to redirect to dashboard");
+    console.log("home page is going to redirect to dashboard", userId);
 
     throw redirect({
       to: "/dashboard",
