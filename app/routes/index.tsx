@@ -19,6 +19,8 @@ const fetchClerkAuth = createServerFn({ method: "GET" }).handler(async () => {
   const { userId } = await getAuth(getWebRequest());
 
   if (userId) {
+    console.log("home page is going to redirect to dashboard");
+
     throw redirect({
       to: "/dashboard",
     });
@@ -30,7 +32,6 @@ const fetchClerkAuth = createServerFn({ method: "GET" }).handler(async () => {
 export const Route = createFileRoute("/")({
   component: Home,
   beforeLoad: async () => await fetchClerkAuth(),
-  ssr: false,
 });
 
 function Home() {

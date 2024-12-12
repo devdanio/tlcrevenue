@@ -12,7 +12,6 @@ import "@fontsource-variable/lexend-deca";
 import { AppContext, AppContextType } from "@/providers/AppProvider";
 
 export const Route = createRootRoute({
-  ssr: false,
   head: () => ({
     meta: [
       {

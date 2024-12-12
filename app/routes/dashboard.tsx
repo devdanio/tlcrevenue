@@ -25,7 +25,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 const fetchClerkAuth = createServerFn({ method: "GET" }).handler(
   async (ctx) => {
-    const { userId, orgPermissions, orgId } = await getAuth(getWebRequest());
+    const { userId, orgId } = await getAuth(getWebRequest());
 
     const hasActiveOrg = !!orgId;
 
