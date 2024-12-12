@@ -1,13 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
+
 import { Skeleton } from "@/components/ui/skeleton";
 import {
   SignedIn,
-  UserButton,
   SignOutButton,
   SignedOut,
   SignInButton,
-  SignUpButton,
   useUser,
 } from "@clerk/tanstack-start";
 import { getAuth } from "@clerk/tanstack-start/server";

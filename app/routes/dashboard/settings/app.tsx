@@ -3,7 +3,11 @@ import { Textarea } from "@/components/ui/textarea";
 import { getAppSettings, updateAppSettings } from "@/server/app-settings";
 
 import { Label } from "@radix-ui/react-dropdown-menu";
-import { createFileRoute, useLoaderData } from "@tanstack/react-router";
+import {
+  createFileRoute,
+  useLoaderData,
+  useRouter,
+} from "@tanstack/react-router";
 
 import { useForm } from "react-hook-form";
 
@@ -19,6 +23,8 @@ export const Route = createFileRoute("/dashboard/settings/app")({
 
 function RouteComponent() {
   const { appSettings } = Route.useLoaderData();
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -29,8 +35,10 @@ function RouteComponent() {
     },
   });
 
-  const onSubmit = (data: { iframe_url: string }) => {
-    return updateAppSettings({ data });
+  const onSubmit = async (data: { iframe_url: string }) => {
+    await updateAppSettings({ data });
+    router.invalidate();
+    return;
   };
 
   return (
