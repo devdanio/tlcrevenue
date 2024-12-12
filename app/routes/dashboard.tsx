@@ -29,6 +29,7 @@ const fetchClerkAuth = createServerFn({ method: "GET" }).handler(
 
     const hasActiveOrg = !!orgId;
 
+    console.log("From the dashboard, waht is the userID?", userId);
     if (!userId) {
       throw redirect({
         to: "/",

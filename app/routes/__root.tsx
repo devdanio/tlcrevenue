@@ -71,8 +71,6 @@ function RootComponent() {
 }
 
 function RootDocument({ children }: { children: React.ReactNode }) {
-  console.log("");
-
   return (
     <ClerkProvider>
       <html>

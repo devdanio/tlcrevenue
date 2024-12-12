@@ -25,13 +25,14 @@ const fetchClerkAuth = createServerFn({ method: "GET" }).handler(async () => {
       to: "/dashboard",
     });
   }
+
   return {
     userId,
   };
 });
 export const Route = createFileRoute("/")({
   component: Home,
-  beforeLoad: async () => await fetchClerkAuth(),
+  // beforeLoad: async () => await fetchClerkAuth(),
 });
 
 function Home() {
